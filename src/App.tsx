@@ -6,7 +6,7 @@ import DepartmentList from './components/DepartmentList';
 import EmployeeList from './components/EmployeeList';
 import SchemaView from './components/SchemaView';
 
-let deptCounter = 4; // Start after D03
+let deptCounter = 6; // Start after D05
 
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>('dashboard');
