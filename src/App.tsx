@@ -6,6 +6,8 @@ import DepartmentList from './components/DepartmentList';
 import EmployeeList from './components/EmployeeList';
 import SchemaView from './components/SchemaView';
 
+let deptCounter = 4; // Start after D03
+
 export default function App() {
   const [currentPage, setCurrentPage] = useState<Page>('dashboard');
   const [departments, setDepartments] = useState<Department[]>(initialDepartments);
@@ -14,7 +16,8 @@ export default function App() {
 
   // Department handlers
   const addDepartment = (dept: Omit<Department, 'departmentId'>) => {
-    const newId = departments.length > 0 ? Math.max(...departments.map(d => d.departmentId)) + 1 : 1;
+    const newId = `D${String(deptCounter).padStart(2, '0')}`;
+    deptCounter++;
     setDepartments([...departments, { ...dept, departmentId: newId }]);
   };
 
@@ -22,7 +25,7 @@ export default function App() {
     setDepartments(departments.map(d => d.departmentId === updated.departmentId ? updated : d));
   };
 
-  const deleteDepartment = (id: number) => {
+  const deleteDepartment = (id: string) => {
     setDepartments(departments.filter(d => d.departmentId !== id));
     setEmployees(employees.map(e => e.departmentId === id ? { ...e, departmentId: null } : e));
   };

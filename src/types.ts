@@ -1,5 +1,5 @@
 export interface Department {
-  departmentId: number;
+  departmentId: string;
   departmentName: string;
   location: string;
 }
@@ -9,7 +9,7 @@ export interface Employee {
   employeeName: string;
   email: string;
   phone: string;
-  departmentId: number | null;
+  departmentId: string | null;
 }
 
 export type Page = 'dashboard' | 'departments' | 'employees' | 'schema';

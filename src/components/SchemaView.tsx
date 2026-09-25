@@ -2,7 +2,7 @@ export default function SchemaView() {
   const schemaSQL = `-- COMPANY MANAGEMENT SYSTEM - ORACLE DATABASE
 
 CREATE TABLE DEPARTMENT (
-    DEPARTMENT_ID NUMBER PRIMARY KEY,
+    DEPARTMENT_ID VARCHAR2(10) PRIMARY KEY,
     DEPARTMENT_NAME VARCHAR2(100) NOT NULL,
     LOCATION VARCHAR2(100)
 );
@@ -12,19 +12,20 @@ CREATE TABLE EMPLOYEE (
     EMPLOYEE_NAME VARCHAR2(100) NOT NULL,
     EMAIL VARCHAR2(150),
     PHONE VARCHAR2(20),
-    DEPARTMENT_ID NUMBER,
+    DEPARTMENT_ID VARCHAR2(10),
     CONSTRAINT FK_EMP_DEPT FOREIGN KEY (DEPARTMENT_ID)
         REFERENCES DEPARTMENT(DEPARTMENT_ID)
 );
 
 -- Sample data
-INSERT INTO DEPARTMENT VALUES (1, 'Human Resources', 'Mumbai');
-INSERT INTO DEPARTMENT VALUES (2, 'Information Technology', 'Pune');
-INSERT INTO DEPARTMENT VALUES (3, 'Finance', 'Mumbai');
+INSERT INTO DEPARTMENT VALUES ('D01', 'DATA SCIENCE', 'BOSTON');
+INSERT INTO DEPARTMENT VALUES ('D02', 'FINANCE', 'CALIFORNIA');
+INSERT INTO DEPARTMENT VALUES ('D03', 'RND', 'LONDON');
 
-INSERT INTO EMPLOYEE VALUES (101, 'Rahul Sharma', 'rahul@example.com', '9876543210', 1);
-INSERT INTO EMPLOYEE VALUES (102, 'Priya Patil', 'priya@example.com', '9876501234', 2);
-INSERT INTO EMPLOYEE VALUES (103, 'Aarav Mehta', 'aarav@example.com', '9876512345', 3);
+INSERT INTO EMPLOYEE VALUES (908, 'GEORGE', 'george@yahoo.com', '9876543210', 'D02');
+INSERT INTO EMPLOYEE VALUES (345, 'LILLY', 'lilly23@gmail.com', '9876501234', 'D01');
+INSERT INTO EMPLOYEE VALUES (809, 'SERAPHINA', 'seraph567@gmail.com', '9876512345', 'D03');
+INSERT INTO EMPLOYEE VALUES (567, 'KAEL', 'kael34@gmail.com', '456745656', 'D01');
 
 COMMIT;`;
 
@@ -32,7 +33,7 @@ COMMIT;`;
     {
       name: 'DEPARTMENT',
       columns: [
-        { name: 'DEPARTMENT_ID', type: 'NUMBER', constraint: 'PRIMARY KEY' },
+        { name: 'DEPARTMENT_ID', type: 'VARCHAR2(10)', constraint: 'PRIMARY KEY' },
         { name: 'DEPARTMENT_NAME', type: 'VARCHAR2(100)', constraint: 'NOT NULL' },
         { name: 'LOCATION', type: 'VARCHAR2(100)', constraint: '' },
       ],
@@ -44,7 +45,7 @@ COMMIT;`;
         { name: 'EMPLOYEE_NAME', type: 'VARCHAR2(100)', constraint: 'NOT NULL' },
         { name: 'EMAIL', type: 'VARCHAR2(150)', constraint: '' },
         { name: 'PHONE', type: 'VARCHAR2(20)', constraint: '' },
-        { name: 'DEPARTMENT_ID', type: 'NUMBER', constraint: 'FOREIGN KEY → DEPARTMENT' },
+        { name: 'DEPARTMENT_ID', type: 'VARCHAR2(10)', constraint: 'FOREIGN KEY → DEPARTMENT' },
       ],
     },
   ];
@@ -72,6 +73,7 @@ COMMIT;`;
               <div className="flex items-center gap-2">
                 <i className="fas fa-key text-amber-500 text-xs"></i>
                 <span className="font-mono text-blue-700">DEPARTMENT_ID</span>
+                <span className="text-xs text-gray-400 ml-auto">VARCHAR2</span>
               </div>
               <div className="flex items-center gap-2 pl-5">
                 <span className="font-mono text-gray-600">DEPARTMENT_NAME</span>
@@ -103,6 +105,7 @@ COMMIT;`;
               <div className="flex items-center gap-2">
                 <i className="fas fa-key text-amber-500 text-xs"></i>
                 <span className="font-mono text-emerald-700">EMPLOYEE_ID</span>
+                <span className="text-xs text-gray-400 ml-auto">NUMBER</span>
               </div>
               <div className="flex items-center gap-2 pl-5">
                 <span className="font-mono text-gray-600">EMPLOYEE_NAME</span>
@@ -116,6 +119,7 @@ COMMIT;`;
               <div className="flex items-center gap-2">
                 <i className="fas fa-link text-violet-500 text-xs"></i>
                 <span className="font-mono text-violet-700">DEPARTMENT_ID</span>
+                <span className="text-xs text-gray-400 ml-auto">VARCHAR2</span>
               </div>
             </div>
           </div>

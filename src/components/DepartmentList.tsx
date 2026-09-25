@@ -7,14 +7,14 @@ interface DepartmentListProps {
   employees: Employee[];
   onAdd: (dept: Omit<Department, 'departmentId'>) => void;
   onUpdate: (dept: Department) => void;
-  onDelete: (id: number) => void;
+  onDelete: (id: string) => void;
 }
 
 export default function DepartmentList({ departments, employees, onAdd, onUpdate, onDelete }: DepartmentListProps) {
   const [showModal, setShowModal] = useState(false);
   const [editingDept, setEditingDept] = useState<Department | null>(null);
   const [form, setForm] = useState({ departmentName: '', location: '' });
-  const [deleteConfirm, setDeleteConfirm] = useState<number | null>(null);
+  const [deleteConfirm, setDeleteConfirm] = useState<string | null>(null);
 
   const openAdd = () => {
     setEditingDept(null);
@@ -40,12 +40,12 @@ export default function DepartmentList({ departments, employees, onAdd, onUpdate
     setShowModal(false);
   };
 
-  const handleDelete = (id: number) => {
+  const handleDelete = (id: string) => {
     onDelete(id);
     setDeleteConfirm(null);
   };
 
-  const getEmployeeCount = (deptId: number) => employees.filter(e => e.departmentId === deptId).length;
+  const getEmployeeCount = (deptId: string) => employees.filter(e => e.departmentId === deptId).length;
 
   return (
     <div className="space-y-6">
@@ -139,7 +139,7 @@ export default function DepartmentList({ departments, employees, onAdd, onUpdate
               value={form.location}
               onChange={e => setForm({ ...form, location: e.target.value })}
               className="w-full px-4 py-2.5 border border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent outline-none transition-all"
-              placeholder="e.g., Mumbai"
+              placeholder="e.g., Boston"
             />
           </div>
           <div className="flex gap-3 pt-2">

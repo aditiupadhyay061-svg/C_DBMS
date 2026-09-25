@@ -30,7 +30,7 @@ export default function EmployeeList({ employees, departments, onAdd, onUpdate, 
       employeeName: emp.employeeName,
       email: emp.email,
       phone: emp.phone,
-      departmentId: emp.departmentId?.toString() || '',
+      departmentId: emp.departmentId || '',
     });
     setShowModal(true);
   };
@@ -43,7 +43,7 @@ export default function EmployeeList({ employees, departments, onAdd, onUpdate, 
       employeeName: form.employeeName,
       email: form.email,
       phone: form.phone,
-      departmentId: form.departmentId ? parseInt(form.departmentId) : null,
+      departmentId: form.departmentId || null,
     };
 
     if (editingEmp) {
@@ -63,7 +63,7 @@ export default function EmployeeList({ employees, departments, onAdd, onUpdate, 
     const matchesSearch = emp.employeeName.toLowerCase().includes(searchQuery.toLowerCase()) ||
       emp.email.toLowerCase().includes(searchQuery.toLowerCase());
     const matchesDept = filterDept === 'all' || 
-      (filterDept === 'unassigned' ? emp.departmentId === null : emp.departmentId === parseInt(filterDept));
+      (filterDept === 'unassigned' ? emp.departmentId === null : emp.departmentId === filterDept);
     return matchesSearch && matchesDept;
   });
 
